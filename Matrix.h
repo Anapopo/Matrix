@@ -216,6 +216,7 @@ Matrix Matrix::operator*(Matrix &mat)
     if (this->columns == mat.getRows())
     {
         Matrix temp(this->rows, mat.getColumns());
+
         for (int i = 0; i < this->rows; i++)
         {
             for (int k = 0; k < mat.getColumns(); k++)
@@ -232,17 +233,13 @@ Matrix Matrix::operator*(Matrix &mat)
 }
 //矩阵的转置
 Matrix Matrix::transpose()
-{   
-    if (this->rows == this->columns)
-    {
-        Matrix temp(this->rows);
+{
+    Matrix temp(this->columns, this->rows);
 
-        for (int i = 0; i < this->rows; i++)
-            for (int j = 0; j < this->columns; j++)
-                temp.set(i, j, this->element[j][i]);
-        return temp;
-    }
-    else throw invalid_argument("Rows and Columns should be equal");
+    for (int i = 0; i < temp.getRows(); i++)
+        for (int j = 0; j < temp.getColumns(); j++)
+            temp.set(i, j, this->element[j][i]);
+    return temp;
 }
 //判断上下三角
 bool Matrix::isTriangular(bool up)
