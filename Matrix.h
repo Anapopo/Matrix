@@ -13,7 +13,7 @@ private:
     void init(int rows, int columns, int x);
 
 public:
-    Matrix(int rows = 0); //rows½×·½Õó
+    Matrix(int rows = 0); //rowsé˜¶æ–¹é˜µ
     Matrix(int rows, int columns);
     Matrix(int rows, int columns, int x);
     Matrix(int rows, int columns, int values[]);
@@ -22,21 +22,21 @@ public:
     friend ostream& operator<<(ostream& out, Matrix&);
     int get(int i, int j);
     void set(int i, int j, int x);
-    int getRows();//·µ»Ø¾ØÕóĞĞÊı
-    int getColumns();//·µ»ØÁĞÊı
-    void setRowsColumns(int rows, int columns);//ÉèÖÃĞĞÊıÁĞÊı£¬×Ô¶¯À©Èİ
+    int getRows();//è¿”å›çŸ©é˜µè¡Œæ•°
+    int getColumns();//è¿”å›åˆ—æ•°
+    void setRowsColumns(int rows, int columns);//è®¾ç½®è¡Œæ•°åˆ—æ•°ï¼Œè‡ªåŠ¨æ‰©å®¹
     //5-1
     Matrix(Matrix &mat);
     Matrix& operator=(Matrix &mat);
     bool operator==(Matrix &mat);
-    void operator+=(Matrix &mat);//µ±Ç°¾ØÕó¼ÓÉÏÒ»¸ö¾ØÕó
-    Matrix operator+(Matrix &mat);//·µ»ØÏà¼ÓºóµÄ¾ØÕó£¬±£Áô*this
-    void operator*=(Matrix &mat);//µ±Ç°¾ØÕó³ËÉÏÒ»¸ö¾ØÕó
+    void operator+=(Matrix &mat);//å½“å‰çŸ©é˜µåŠ ä¸Šä¸€ä¸ªçŸ©é˜µ
+    Matrix operator+(Matrix &mat);//è¿”å›ç›¸åŠ åçš„çŸ©é˜µï¼Œä¿ç•™*this
+    void operator*=(Matrix &mat);//å½“å‰çŸ©é˜µä¹˜ä¸Šä¸€ä¸ªçŸ©é˜µ
     Matrix operator*(Matrix &mat);
     Matrix transpose();
     bool isTriangular(bool up);
-    bool isSymmetric();//ÅĞ¶ÏÊÇ·ñÊÇ¶Ô³Æ¾ØÕó
-    int saddlePoint();//·µ»Ø¾ØÕóµÄ°°µãÖµ
+    bool isSymmetric();//åˆ¤æ–­æ˜¯å¦æ˜¯å¯¹ç§°çŸ©é˜µ
+    int saddlePoint();//è¿”å›çŸ©é˜µçš„éç‚¹å€¼
 	static int** helixPhalanx(int n);
 };
 
@@ -60,7 +60,7 @@ void Matrix::init(int rows, int columns, int x)
         for (int j = 0; j < columns; j++)
             this->element[i][j] = x;
 }
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 Matrix::Matrix(int rows) { this->init(rows, rows); }
 
 Matrix::Matrix(int rows, int columns) { this->init(rows, columns); }
@@ -74,14 +74,14 @@ Matrix::Matrix(int rows, int columns, int values[])
         for (int j = 0; j < columns; j++)
             this->element[i][j] = values[i * columns + j];
 }
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 Matrix::~Matrix()
 {
     for (int i = 0; i < rows; i++)
         delete(this->element[i]);
     delete(this->element);
 }
-//ÖØÔØ<<·ûºÅ
+//é‡è½½<<ç¬¦å·
 ostream& operator<<(ostream& out, Matrix &mat)
 {
     out << "Matrix (" << mat.rows << "X" << mat.columns << ")" << endl;
@@ -93,21 +93,21 @@ ostream& operator<<(ostream& out, Matrix &mat)
     }
     return out;
 }
-//ÉèÖÃÔªËØ
+//è®¾ç½®å…ƒç´ 
 void Matrix::set(int i, int j, int x)
 {
     if (i >= 0 && i < rows && j >= 0 && j < columns)
         this->element[i][j] = x;
     else throw out_of_range("i and j must be range from 0 to rows/columns");
 }
-//»ñÈ¡ÔªËØ
+//è·å–å…ƒç´ 
 int Matrix::get(int i, int j)
 {   
     if (i >= 0 && i < rows && j >= 0 && j < columns)
         return this->element[i][j];
     throw out_of_range("can not find the specify i and j!");
 }
-//Ö¸¶¨¾ØÕóĞĞÊıºÍÁĞÊı
+//æŒ‡å®šçŸ©é˜µè¡Œæ•°å’Œåˆ—æ•°
 void Matrix::setRowsColumns(int rows, int columns)
 {
     if (rows > this->rows || columns > this->columns)
@@ -126,11 +126,11 @@ void Matrix::setRowsColumns(int rows, int columns)
         
     }
 }
-//·µ»Ø¾ØÕóĞĞÊı
+//è¿”å›çŸ©é˜µè¡Œæ•°
 int Matrix::getRows() { return this->rows; }
-//·µ»Ø¾ØÕóÁĞÊı
+//è¿”å›çŸ©é˜µåˆ—æ•°
 int Matrix::getColumns() { return this->columns; }
-//¸´ÖÆ¹¹Ôìº¯Êı
+//å¤åˆ¶æ„é€ å‡½æ•°
 Matrix::Matrix(Matrix &mat)
 {
     this->init(mat.getRows(), mat.getColumns());
@@ -138,7 +138,7 @@ Matrix::Matrix(Matrix &mat)
         for (int j = 0; j < mat.getColumns(); j++)
             this->element[i][j] = mat.get(i, j);
 }
-//¸³Öµ²Ù×÷·ûºÅ
+//èµ‹å€¼æ“ä½œç¬¦å·
 Matrix& Matrix::operator=(Matrix &mat)
 {
     if (this != &mat)
@@ -151,7 +151,7 @@ Matrix& Matrix::operator=(Matrix &mat)
     }
     return *this;
 }
-//±È½ÏÁ½¸ö¾ØÕóÊÇ·ñÏàµÈ
+//æ¯”è¾ƒä¸¤ä¸ªçŸ©é˜µæ˜¯å¦ç›¸ç­‰
 bool Matrix::operator==(Matrix &mat)
 {   
     if (this->rows != mat.getRows() || this->columns != mat.getColumns())
@@ -162,7 +162,7 @@ bool Matrix::operator==(Matrix &mat)
                 return false;
     return true;
 }
-//µ±Ç°¾ØÕó¼ÓÉÏÒ»¸ö¾ØÕó
+//å½“å‰çŸ©é˜µåŠ ä¸Šä¸€ä¸ªçŸ©é˜µ
 void Matrix::operator+=(Matrix &mat)
 {
     if (this->rows == mat.getRows() && this->columns == mat.getColumns())
@@ -173,7 +173,7 @@ void Matrix::operator+=(Matrix &mat)
     }
     else throw invalid_argument("The specify matrix's rows/columns must be the same as this");
 }
-//·µ»ØÏà¼ÓºóµÄ¾ØÕó£¬±£Áô*this
+//è¿”å›ç›¸åŠ åçš„çŸ©é˜µï¼Œä¿ç•™*this
 Matrix Matrix::operator+(Matrix &mat)
 {
     if (this->rows == mat.getRows() && this->columns == mat.getColumns())
@@ -184,7 +184,7 @@ Matrix Matrix::operator+(Matrix &mat)
     }
     else throw invalid_argument("The specify matrix's rows/columns must be the same as this");
 }
-//µ±Ç°¾ØÕó³ËÉÏÒ»¸ö¾ØÕó
+//å½“å‰çŸ©é˜µä¹˜ä¸Šä¸€ä¸ªçŸ©é˜µ
 void Matrix::operator*=(Matrix &mat)
 {
     if (this->columns == mat.getRows())
@@ -212,7 +212,7 @@ void Matrix::operator*=(Matrix &mat)
     }
     else throw invalid_argument("The specify matrix error");
 }
-//·µ»ØÁ½¾ØÕóÏà³ËºóµÄ¾ØÕó£¬±£³Ö*this²»±ä
+//è¿”å›ä¸¤çŸ©é˜µç›¸ä¹˜åçš„çŸ©é˜µï¼Œä¿æŒ*thisä¸å˜
 Matrix Matrix::operator*(Matrix &mat)
 {
     if (this->columns == mat.getRows())
@@ -233,7 +233,7 @@ Matrix Matrix::operator*(Matrix &mat)
     }
     else throw invalid_argument("The specify matrix error");
 }
-//¾ØÕóµÄ×ªÖÃ
+//çŸ©é˜µçš„è½¬ç½®
 Matrix Matrix::transpose()
 {
     Matrix temp(this->columns, this->rows);
@@ -243,7 +243,7 @@ Matrix Matrix::transpose()
             temp.set(i, j, this->element[j][i]);
     return temp;
 }
-//ÅĞ¶ÏÉÏÏÂÈı½Ç
+//åˆ¤æ–­ä¸Šä¸‹ä¸‰è§’
 bool Matrix::isTriangular(bool up)
 {
     for (int i = 0; i < this->rows; i++)
@@ -252,7 +252,7 @@ bool Matrix::isTriangular(bool up)
                 return false;
     return true;
 }
-//ÅĞ¶ÏÊÇ·ñÊÇ¶Ô³Æ¾ØÕó
+//åˆ¤æ–­æ˜¯å¦æ˜¯å¯¹ç§°çŸ©é˜µ
 bool Matrix::isSymmetric()
 {
     for (int i = 0; i < this->rows; i++)
@@ -264,7 +264,7 @@ bool Matrix::isSymmetric()
         }
     return true;
 }
-//·µ»Ø¾ØÕóµÄ°°µãÖµ
+//è¿”å›çŸ©é˜µçš„éç‚¹å€¼
 int Matrix::saddlePoint()
 {   
     int flag;
@@ -280,17 +280,17 @@ int Matrix::saddlePoint()
                 rows_min = this->element[i][j];
             }    
         }
-        //´ËÊ±rows_minÊÇµÚiĞĞÖĞ×îĞ¡µÄÔªËØ£¬rows_min_jÊÇËüµÄÁĞ±ê
+        //æ­¤æ—¶rows_minæ˜¯ç¬¬iè¡Œä¸­æœ€å°çš„å…ƒç´ ï¼Œrows_min_jæ˜¯å®ƒçš„åˆ—æ ‡
         flag = 1;
-        for (int k = 0; k < this->rows; k++)//±éÀúµÚ(rows_min_j)ÁĞ
+        for (int k = 0; k < this->rows; k++)//éå†ç¬¬(rows_min_j)åˆ—
         {
-            if (this->element[k][rows_min_j] > rows_min)//ÅĞ¶Ïrows_minÊÇ²»ÊÇµ±Ç°ÁĞµÄ×î´óÖµ
+            if (this->element[k][rows_min_j] > rows_min)//åˆ¤æ–­rows_minæ˜¯ä¸æ˜¯å½“å‰åˆ—çš„æœ€å¤§å€¼
             {
                 flag = 0;
                 break;
             }
         }
-        if (flag)/*Èç¹ûÌõ¼ş³ÉÁ¢£¬Ôò±íÃ÷³É¹¦ÕÒµ½°°µã*/
+        if (flag)/*å¦‚æœæ¡ä»¶æˆç«‹ï¼Œåˆ™è¡¨æ˜æˆåŠŸæ‰¾åˆ°éç‚¹*/
         {   
             cout << "saddlePoint(i,j)=" << rows_min << ",i=" << i << ",j=" << rows_min_j << "." << endl;
             return rows_min;
@@ -309,7 +309,7 @@ int** Matrix::helixPhalanx(int n)
             out[i][j]=0;
     
     while(true) {
-        out[posX][posY] = writeNumber;//¿¿¿
+        out[posX][posY] = writeNumber;//å†™æ•°æ®
         writeNumber++;
         if (writeNumber == n*n+1) break;
         

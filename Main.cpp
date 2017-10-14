@@ -9,10 +9,10 @@ int main()
     Matrix ete(4, 4, e);
 
     cout << "Ete is " << ete;
-    cout << "Ete is Symmetric ? Echo:" << ete.isSymmetric() << endl << endl;//正确
+    cout << "Ete is Symmetric ? Echo:" << ete.isSymmetric() << endl << endl;//姝ｇ‘
 
     cout << "Mat is " << mat;
-    cout << "(Mat == Ete) ? Echo:" << (mat == ete) << endl << endl;//正确
+    cout << "(Mat == Ete) ? Echo:" << (mat == ete) << endl << endl;//姝ｇ‘
 
     mat += mat3;
     cout << "Mat + Mat3 is " << mat << endl;
