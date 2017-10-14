@@ -1,7 +1,7 @@
 #include "Matrix.h"
 int main()
 {
-
+	/*
     int table[4*4] = {1,2,3,4,5,6,7,8,9};
     Matrix mat(4, 4, table), mat2(mat), mat3 = mat;
     
@@ -34,7 +34,8 @@ int main()
     cout << "Mat6 is Triangular ? Echo:" << mat6.isTriangular(true) << endl << endl;
 
     mat6.saddlePoint();
-
+	*/
+	Matrix::helixPhalanx(4);
     return 0;
 }
 

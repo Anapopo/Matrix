@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <iostream>
 using namespace std;
 #include <iomanip>
@@ -36,6 +37,7 @@ public:
     bool isTriangular(bool up);
     bool isSymmetric();//≈–∂œ «∑Ò «∂‘≥∆æÿ’Û
     int saddlePoint();//∑µªÿæÿ’Ûµƒ∞∞µ„÷µ
+	static int** helixPhalanx(int n);
 };
 
 void Matrix::init(int rows, int columns)
@@ -295,4 +297,60 @@ int Matrix::saddlePoint()
         }
     }
     return -1;    
+}
+int** Matrix::helixPhalanx(int n)
+{
+    int ** out = new int*[n];
+    for (int i = 0; i < n; i++) out[i] = new int[n];
+    int posX=0,posY=0,direction=0,writeNumber=1;
+
+    for (int i=0;i<n;i++)
+        for (int j=0;j<n;j++)
+            out[i][j]=0;
+    
+    while(true) {
+        out[posX][posY] = writeNumber;//øøø
+        writeNumber++;
+        if (writeNumber == n*n+1) break;
+        
+        switch(direction) {
+            case 0://right
+                if (posY<=n-2 && out[posX][posY+1] == 0) posY++;
+                else {
+                    posX++;
+                    direction = 1;
+                }
+                break;
+            case 1://Down
+                if (posX<=n-2 && out[posX+1][posY] == 0) posX++;
+                else {
+                    posY--;
+                    direction = 2;
+                }
+                break;
+            case 2://Left
+                if (posY>=1 && out[posX][posY-1] == 0) posY--;
+                else {
+                    posX--;
+                    direction = 3;
+                }
+                break;
+            case 3://Up
+                if (posX>=1 && out[posX-1][posY] == 0) posX--;
+                else {
+                    posY++;
+                    direction = 0;
+                }
+                break;
+        }
+        printf("Next Position is (%d:%d:%d)\n", posX, posY, direction);
+    }
+    
+    printf("Matrix:%d*%d\n", n, n);
+    for (int i=0;i<n;i++) {
+        for (int j=0;j<n;j++)
+            cout << setw(3) << out[i][j];
+        printf("\n");
+    }
+    return out;
 }
