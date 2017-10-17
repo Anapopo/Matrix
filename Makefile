@@ -5,4 +5,5 @@ test:
 clean:
 	rm -rf ./mat
 so: Matrix.h Matrix.cpp
-	g++ -shared -fPIC Matrix.cpp -o libmatrix.so
+	g++ -shared -fPIC Matrix.cpp -o libmatrix.so && \
+[ -d $(MYLIB_PATH) ] && cp libmatrix.so $(MYLIB_PATH)

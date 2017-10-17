@@ -5,4 +5,5 @@ A Simple Matrix Designed By C++
 Just type `make so && make`
 
 # Use
+Copy `libmatrix.so` to `path/to/usr/lib`  
 Just type `./mat`

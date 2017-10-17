@@ -1,4 +1,5 @@
 #include "Matrix.h"
+
 void Matrix::init(int rows, int columns)
 {
     if (rows > 0 && columns > 0)
@@ -107,9 +108,10 @@ Matrix& Matrix::operator=(Matrix &mat)
         for (int i = 0; i < mat.getRows(); i++)
             for (int j = 0; j < mat.getColumns(); j++)
                 this->element[i][j] = mat.get(i, j);
-    }
-    return *this;
+	}
+    return (*this);
 }
+
 //比较两个矩阵是否相等
 bool Matrix::operator==(Matrix &mat)
 {   
@@ -257,6 +259,7 @@ int Matrix::saddlePoint()
     }
     return -1;    
 }
+
 int** Matrix::helixPhalanx(int n)
 {
     int ** out = new int*[n];
@@ -302,10 +305,10 @@ int** Matrix::helixPhalanx(int n)
                 }
                 break;
         }
-        printf("Next Position is (%d:%d:%d)\n", posX, posY, direction);
+        //printf("Next Position is (%d:%d:%d)\n", posX, posY, direction);
     }
     
-    printf("Matrix:%d*%d\n", n, n);
+    printf("Helix Matrix:%d*%d\n", n, n);
     for (int i=0;i<n;i++) {
         for (int j=0;j<n;j++)
             cout << setw(3) << out[i][j];

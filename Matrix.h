@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <iostream>
-using namespace std;
 #include <iomanip>
+using namespace std;
+
 class Matrix
 {
 private:
@@ -39,3 +40,4 @@ public:
     int saddlePoint();//返回矩阵的鞍点值
     static int** helixPhalanx(int n);
 };
+

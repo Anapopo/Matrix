@@ -1,7 +1,7 @@
 #include "Matrix.h"
 int main()
 {
-	/*
+/*
     int table[4*4] = {1,2,3,4,5,6,7,8,9};
     Matrix mat(4, 4, table), mat2(mat), mat3 = mat;
     
@@ -15,12 +15,12 @@ int main()
     cout << "(Mat == Ete) ? Echo:" << (mat == ete) << endl << endl;//正确
 
     mat += mat3;
-    cout << "Mat + Mat3 is " << mat << endl;
+    cout << "Mat + Mat is " << mat << endl;
+    Matrix mat4(4);    
+	mat4 = (mat2 + mat3);
+    cout << "Mat + Mat is " << mat4 << endl;
 
-    Matrix mat4 = mat2 + mat3;
-    cout << "Mat2 + Mat3 is " << mat4 << endl;
-
-    Matrix mat5 = mat * mat4;
+    Matrix mat5 = (mat * mat4);
     cout << "Mat * Mat4 is " << mat5 << endl;
 
     mat *= mat4;
@@ -34,8 +34,8 @@ int main()
     cout << "Mat6 is Triangular ? Echo:" << mat6.isTriangular(true) << endl << endl;
 
     mat6.saddlePoint();
-	*/
-	Matrix::helixPhalanx(4);
+*/	
+	Matrix::helixPhalanx(5);
     return 0;
 }
 
