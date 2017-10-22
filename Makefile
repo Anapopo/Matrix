@@ -1,9 +1,14 @@
-all: Main.cpp
+PREFIX=/usr/lib
+bin=/usr/local/bin
+LIB_NAME=libmatrix.so
+
+
+all: Main.cpp so
 	g++ Main.cpp -L. -lmatrix -o mat
-test:
-	./mat
+
 clean:
-	rm -rf ./mat
+	rm -rf mat $(LIB_NAME)
+
 so: Matrix.h Matrix.cpp
-	g++ -shared -fPIC Matrix.cpp -o libmatrix.so && \
-[ -d $(MYLIB_PATH) ] && cp libmatrix.so $(MYLIB_PATH)
+	g++ -shared -fPIC Matrix.cpp -o $(LIB_NAME) && \
+sudo cp $(LIB_NAME) $(PREFIX)
